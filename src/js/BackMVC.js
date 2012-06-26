@@ -1,9 +1,20 @@
+/*!
+ * BackMVC.js 0.1.0
+ * May be freely distributed under the MIT license
+ * https://github.com/krange/backmvc
+ */
 (function (global) {
+	var BaseFacadable, Actor, Message, BaseObserver, CommandObserver, ModelObserver,
+		RouterObserver, ViewObserver, Model, Collection, View, Command, Router,
+		Facade, BackMVC;
+
+	global.BackMVC = BackMVC = {};
+
 	/**
 	 * Base object that can register and remove a facade object. Each actor in
 	 * the framework extends this at its very base.
 	 */
-	BaseFacadable = {};
+	BackMVC.BaseFacadable = BaseFacadable = {};
 	_.extend(BaseFacadable, {
 		/**
 		 * Register a facade instance. Only called via the Facade to register
@@ -43,7 +54,7 @@
 	 *
 	 * @extends {BaseFacadable}
 	 */
-	Actor = {};
+	BackMVC.Actor = Actor = {};
 	_.extend(Actor, BaseFacadable, {
 		/**
 		 * Get the actors name
@@ -227,6 +238,7 @@
 		this.body = body;
 		this.type = type;
 	};
+	BackMVC.Message = Message;
 	_.extend(Message.prototype, {
 		/**
 		 * Retrieve the name of the message
@@ -264,6 +276,7 @@
 	BaseObserver = function () {
 		this._data = {};
 	};
+	BackMVC.BaseObserver = BaseObserver;
 	_.extend(BaseObserver.prototype, BaseFacadable, {
 		/**
 		 * Register
@@ -301,6 +314,7 @@
 	CommandObserver = function () {
 		BaseObserver.apply(this, arguments);
 	};
+	BackMVC.CommandObserver = CommandObserver;
 	_.extend(CommandObserver.prototype, BaseObserver.prototype, {
 		/**
 		 * Registers the command class and associates it to the message
@@ -360,6 +374,7 @@
 	ModelObserver = function () {
 		BaseObserver.apply(this, arguments);
 	}
+	BackMVC.ModelObserver = ModelObserver;
 	_.extend(ModelObserver.prototype, BaseObserver.prototype, {
 		/**
 		 * Registers a model or collection
@@ -418,6 +433,7 @@
 	ViewObserver = function () {
 		BaseObserver.apply(this, arguments);
 	};
+	BackMVC.ViewObserver = ViewObserver;
 	_.extend(ViewObserver.prototype, BaseObserver.prototype, {
 		/**
 		 * Registers a view
@@ -477,6 +493,7 @@
 	RouterObserver = function () {
 		BaseObserver.apply(this, arguments);
 	};
+	BackMVC.RouterObserver = RouterObserver;
 	_.extend(RouterObserver.prototype, BaseObserver.prototype, {
 		/**
 		 * Registers a router
@@ -541,7 +558,7 @@
 			this._routerObserver.registerFacade(this);
 			this._viewObserver.registerFacade(this);
 	};
-
+	global.Facade = BackMVC.Facade = Facade;
 	Facade.extend = Backbone.Model.extend;
 	_.extend(Facade.prototype, {
 		/**
@@ -724,6 +741,7 @@
 		this.name = name;
 		Backbone.Model.call(this, attributes, options);
 	};
+	global.Model = BackMVC.Model = Model;
 	Model.extend = Backbone.Model.extend;
 	_.extend(Model.prototype, Actor, Backbone.Model.prototype);
 	delete Model.prototype.registerView;
@@ -744,6 +762,7 @@
 		this.name = name;
 		Backbone.Router.call(this, options);
 	};
+	global.Router = BackMVC.Router = Router;
 	Router.extend = Backbone.Router.extend;
 	_.extend(Router.prototype, Actor, Backbone.Router.prototype);
 
@@ -763,6 +782,8 @@
 		this.name = name;
 		Backbone.Collection.call(this, attributes, options);
 	};
+
+	global.Collection = BackMVC.Collection = Collection;
 	Collection.extend = Backbone.Collection.extend;
 	_.extend(Collection.prototype, Actor, Backbone.Collection.prototype);
 	delete Collection.prototype.registerView;
@@ -778,6 +799,7 @@
 	Command = function () {
 		this.facade = undefined;
 	};
+	global.Command = BackMVC.Command = Command;
 	Command.extend = Backbone.Model.extend;
 	_.extend(Command.prototype, Actor, {
 		/**
@@ -828,6 +850,7 @@
 
 		Backbone.View.call(this, attributes, options);
 	};
+	global.View = BackMVC.View = View;
 	View.extend = Backbone.View.extend;
 	_.extend(View.prototype, Actor, Backbone.View.prototype, {
 		/**

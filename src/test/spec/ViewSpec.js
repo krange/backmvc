@@ -2,7 +2,7 @@ describe('View', function () {
 	var view, SomeView;
 
 	beforeEach(function () {
-		SomeView = View.extend();
+		SomeView = BackMVC.View.extend();
 		SomeView.NAME = 'SomeView';
 	});
 
@@ -18,7 +18,7 @@ describe('View', function () {
 		});
 
 		it('name and attributes', function() {
-			SomeView = View.extend({
+			SomeView = BackMVC.View.extend({
 				initialize: function (attributes, options) {
 					if (attributes.someValue) {
 						this.someValueFound = true;
@@ -56,7 +56,7 @@ describe('View', function () {
 		var facade;
 
 		beforeEach(function () {
-			facade = new Facade();
+			facade = new BackMVC.Facade();
 		});
 
 		afterEach(function () {

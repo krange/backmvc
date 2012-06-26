@@ -2,7 +2,7 @@ describe('ViewObserver', function () {
 	var observer;
 
 	beforeEach(function () {
-		observer = new ViewObserver();
+		observer = new BackMVC.ViewObserver();
 	});
 
 	afterEach(function () {
@@ -20,7 +20,7 @@ describe('ViewObserver', function () {
 		var view, SomeView;
 
 		beforeEach(function () {
-			SomeView = View.extend({});
+			SomeView = BackMVC.View.extend({});
 			SomeView.NAME = 'SomeView';
 
 			view = new SomeView(SomeView.NAME);
@@ -47,11 +47,11 @@ describe('ViewObserver', function () {
 			var data, SomeView1, view1, SomeView2, view2, storedView,
 				storedView1, storedView2;
 
-			SomeView1 = View.extend({});
+			SomeView1 = BackMVC.View.extend({});
 			SomeView1.NAME = 'SomeView1';
 			view1 = new SomeView1(SomeView1.NAME);
 
-			SomeView2 = View.extend({});
+			SomeView2 = BackMVC.View.extend({});
 			SomeView2.NAME = 'SomeView2';
 			view2 = new SomeView2(SomeView2.NAME);
 
@@ -96,7 +96,7 @@ describe('ViewObserver', function () {
 		var view, SomeView;
 
 		beforeEach(function () {
-			SomeView = View.extend({});
+			SomeView = BackMVC.View.extend({});
 			SomeView.NAME = 'SomeView';
 
 			view = new SomeView(SomeView.NAME);
@@ -150,7 +150,7 @@ describe('ViewObserver', function () {
 		var view, SomeView;
 
 		beforeEach(function () {
-			SomeView = View.extend({});
+			SomeView = BackMVC.View.extend({});
 			SomeView.NAME = 'SomeView';
 
 			view = new SomeView(SomeView.NAME);

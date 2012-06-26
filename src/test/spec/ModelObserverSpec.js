@@ -2,7 +2,7 @@ describe('ModelObserver', function () {
 	var observer;
 
 	beforeEach(function () {
-		observer = new ModelObserver();
+		observer = new BackMVC.ModelObserver();
 	});
 
 	afterEach(function () {
@@ -20,7 +20,7 @@ describe('ModelObserver', function () {
 		var model, SomeModel;
 
 		beforeEach(function () {
-			SomeModel = Model.extend({});
+			SomeModel = BackMVC.Model.extend({});
 			SomeModel.NAME = 'SomeModel';
 
 			model = new SomeModel(SomeModel.NAME);
@@ -47,11 +47,11 @@ describe('ModelObserver', function () {
 			var data, SomeModel1, model1, SomeModel2, model2, storedModel,
 				storedModel1, storedModel2;
 
-			SomeModel1 = Model.extend({});
+			SomeModel1 = BackMVC.Model.extend({});
 			SomeModel1.NAME = 'SomeModel1';
 			model1 = new SomeModel1(SomeModel1.NAME);
 
-			SomeModel2 = Model.extend({});
+			SomeModel2 = BackMVC.Model.extend({});
 			SomeModel2.NAME = 'SomeModel2';
 			model2 = new SomeModel2(SomeModel2.NAME);
 
@@ -96,7 +96,7 @@ describe('ModelObserver', function () {
 		var model, SomeModel;
 
 		beforeEach(function () {
-			SomeModel = Model.extend({});
+			SomeModel = BackMVC.Model.extend({});
 			SomeModel.NAME = 'SomeModel';
 
 			model = new SomeModel(SomeModel.NAME);
@@ -150,7 +150,7 @@ describe('ModelObserver', function () {
 		var model, SomeModel;
 
 		beforeEach(function () {
-			SomeModel = Model.extend({});
+			SomeModel = BackMVC.Model.extend({});
 			SomeModel.NAME = 'SomeModel';
 
 			model = new SomeModel(SomeModel.NAME);

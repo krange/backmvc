@@ -2,7 +2,7 @@ describe('Command', function () {
 	var command, SomeCommand;
 
 	beforeEach(function () {
-		SomeCommand = Command.extend();
+		SomeCommand = BackMVC.Command.extend();
 	});
 
 	afterEach(function () {
@@ -13,7 +13,7 @@ describe('Command', function () {
 		var facade;
 
 		beforeEach(function () {
-			facade = new Facade();
+			facade = new BackMVC.Facade();
 		});
 
 		afterEach(function () {

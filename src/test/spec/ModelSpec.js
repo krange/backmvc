@@ -2,7 +2,7 @@ describe('Model', function () {
 	var model, SomeModel;
 
 	beforeEach(function () {
-		SomeModel = Model.extend({
+		SomeModel = BackMVC.Model.extend({
 		});
 		SomeModel.NAME = 'SomeModel';
 	});
@@ -55,7 +55,7 @@ describe('Model', function () {
 		var facade;
 
 		beforeEach(function () {
-			facade = new Facade();
+			facade = new BackMVC.Facade();
 		});
 
 		afterEach(function () {

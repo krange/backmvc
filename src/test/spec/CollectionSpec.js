@@ -2,7 +2,7 @@ describe('Collection', function () {
 	var collection, SomeCollection;
 
 	beforeEach(function () {
-		SomeCollection = Collection.extend({
+		SomeCollection = BackMVC.Collection.extend({
 		});
 		SomeCollection.NAME = 'SomeCollection';
 	});
@@ -41,7 +41,7 @@ describe('Collection', function () {
 		var facade;
 
 		beforeEach(function () {
-			facade = new Facade();
+			facade = new BackMVC.Facade();
 		});
 
 		afterEach(function () {

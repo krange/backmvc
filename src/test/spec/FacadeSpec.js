@@ -2,7 +2,7 @@ describe('Facade', function () {
 	var facade;
 
 	beforeEach(function () {
-		facade = new Facade();
+		facade = new BackMVC.Facade();
 	});
 
 	afterEach(function () {
@@ -22,7 +22,7 @@ describe('Facade', function () {
 		var view, SomeView;
 
 		beforeEach(function () {
-			SomeView = View.extend();
+			SomeView = BackMVC.View.extend();
 			SomeView.NAME = 'SomeView';
 			view = new SomeView(SomeView.NAME);
 		});
@@ -44,9 +44,9 @@ describe('Facade', function () {
 				var storedView, SomeView1, SomeView2, storedView1, storedView2,
 					view1, view2;
 
-				SomeView1 = View.extend();
+				SomeView1 = BackMVC.View.extend();
 				SomeView1.NAME = 'SomeView1';
-				SomeView2 = View.extend();
+				SomeView2 = BackMVC.View.extend();
 				SomeView2.NAME = 'SomeView2';
 
 				view1 = new SomeView1(SomeView1.NAME);
@@ -186,7 +186,7 @@ describe('Facade', function () {
 			it('should send a message from a registered view to another registered view', function() {
 				var view1, ReceivedView;
 
-				ReceivedView = View.extend({
+				ReceivedView = BackMVC.View.extend({
 					respondToTestMessage: function (message) {
 					}
 				});
@@ -206,7 +206,7 @@ describe('Facade', function () {
 			it('should send a message from a registered view but a removed view should not respond', function() {
 				var view1, ReceivedView;
 
-				ReceivedView = View.extend({
+				ReceivedView = BackMVC.View.extend({
 					respondToTestMessage: function (message) {
 					}
 				});
@@ -227,7 +227,7 @@ describe('Facade', function () {
 			it('should send a message from a registered view to another registered command', function() {
 				var ReceivedCommand;
 
-				ReceivedCommand = Command.extend({
+				ReceivedCommand = BackMVC.Command.extend({
 					execute: function (message) {
 						window.messageReceieved = message;
 					}
@@ -249,7 +249,7 @@ describe('Facade', function () {
 		var model, SomeModel;
 
 		beforeEach(function () {
-			SomeModel = Model.extend();
+			SomeModel = BackMVC.Model.extend();
 			SomeModel.NAME = 'SomeModel';
 			model = new SomeModel(SomeModel.NAME);
 		});
@@ -271,9 +271,9 @@ describe('Facade', function () {
 				var storedModel, SomeModel1, SomeModel2, storedModel1, storedModel2,
 					model1, model2;
 
-				SomeModel1 = Model.extend();
+				SomeModel1 = BackMVC.Model.extend();
 				SomeModel1.NAME = 'SomeModel1';
-				SomeModel2 = Model.extend();
+				SomeModel2 = BackMVC.Model.extend();
 				SomeModel2.NAME = 'SomeModel2';
 
 				model1 = new SomeModel1(SomeModel1.NAME);
@@ -413,7 +413,7 @@ describe('Facade', function () {
 			it('should send a message from a registered model to another registered view', function() {
 				var view1, ReceivedView;
 
-				ReceivedView = View.extend({
+				ReceivedView = BackMVC.View.extend({
 					respondToTestMessage: function (message) {
 					}
 				});
@@ -433,7 +433,7 @@ describe('Facade', function () {
 			it('should send a message from a registered model to another registered command', function() {
 				var view1, ReceivedCommand;
 
-				ReceivedCommand = Command.extend({
+				ReceivedCommand = BackMVC.Command.extend({
 					execute: function (message) {
 						window.messageReceieved = message;
 					}
@@ -456,7 +456,7 @@ describe('Facade', function () {
 
 		beforeEach(function () {
 			window.messageReceieved = 0;
-			SomeCommand = Command.extend({
+			SomeCommand = BackMVC.Command.extend({
 				execute: function (message) {
 					window.messageReceieved++;
 				}
@@ -487,7 +487,7 @@ describe('Facade', function () {
 			it('should register multiple different commands to the same message', function() {
 				var SomeCommand1;
 
-				SomeCommand1 = Command.extend({
+				SomeCommand1 = BackMVC.Command.extend({
 					execute: function (message) {
 						window.messageReceieved++;
 					}
@@ -503,12 +503,12 @@ describe('Facade', function () {
 			it('should register different command classes to the different messages', function() {
 				var SomeCommand1, SomeCommand2;
 
-				SomeCommand1 = Command.extend({
+				SomeCommand1 = BackMVC.Command.extend({
 					execute: function (message) {
 						window.messageReceieved++;
 					}
 				});
-				SomeCommand2 = Command.extend({
+				SomeCommand2 = BackMVC.Command.extend({
 					execute: function (message) {
 						window.messageReceieved++;
 					}
@@ -560,7 +560,7 @@ describe('Facade', function () {
 			it('should remove a single already registered command if multiple different commands have been registered', function () {
 				var SomeCommand1;
 
-				SomeCommand1 = Command.extend({
+				SomeCommand1 = BackMVC.Command.extend({
 					execute: function (message) {
 						window.messageReceieved++;
 					}
@@ -580,7 +580,7 @@ describe('Facade', function () {
 			it('should remove a all registered commands to a message if multiple commands have been registered to same message', function () {
 				var SomeCommand1;
 
-				SomeCommand1 = Command.extend({
+				SomeCommand1 = BackMVC.Command.extend({
 					execute: function (message) {
 						window.messageReceieved++;
 					}
@@ -599,7 +599,7 @@ describe('Facade', function () {
 			it('should send a message from a registered command to another registered command', function() {
 				var SomeCommand1;
 
-				SomeCommand1 = Command.extend({
+				SomeCommand1 = BackMVC.Command.extend({
 					execute: function (message) {
 						this.sendMessage('end');
 					}
@@ -615,13 +615,13 @@ describe('Facade', function () {
 			it('should send a message from a registered command to another registered view', function() {
 				var SomeCommand1, SomeView;
 
-				SomeCommand1 = Command.extend({
+				SomeCommand1 = BackMVC.Command.extend({
 					execute: function (message) {
 						this.sendMessage('end');
 					}
 				});
 
-				SomeView = View.extend({
+				SomeView = BackMVC.View.extend({
 					respondToEnd: function (message) {
 						window.messageReceieved++;
 					}
@@ -640,13 +640,13 @@ describe('Facade', function () {
 			it('should send a message from a registered command to another registered view and registered command', function() {
 				var SomeCommand1, SomeView;
 
-				SomeCommand1 = Command.extend({
+				SomeCommand1 = BackMVC.Command.extend({
 					execute: function (message) {
 						this.sendMessage('end');
 					}
 				});
 
-				SomeView = View.extend({
+				SomeView = BackMVC.View.extend({
 					respondToEnd: function (message) {
 						window.messageReceieved++;
 					}

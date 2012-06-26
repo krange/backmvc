@@ -2,7 +2,7 @@ describe('CommandObserver', function () {
 	var observer;
 
 	beforeEach(function () {
-		observer = new CommandObserver();
+		observer = new BackMVC.CommandObserver();
 	});
 
 	afterEach(function () {
@@ -20,7 +20,7 @@ describe('CommandObserver', function () {
 		var SomeCommand;
 
 		beforeEach(function () {
-			SomeCommand = Command.extend({});
+			SomeCommand = BackMVC.Command.extend({});
 		});
 
 		afterEach(function () {
@@ -50,8 +50,8 @@ describe('CommandObserver', function () {
 
 		it('should register a multiple different commands to different messages', function() {
 			var data, SomeCommand1, SomeCommand2;
-			SomeCommand1 = Command.extend({});
-			SomeCommand2 = Command.extend({});
+			SomeCommand1 = BackMVC.Command.extend({});
+			SomeCommand2 = BackMVC.Command.extend({});
 
 			observer.register('someMessage', SomeCommand);
 			observer.register('someMessage1', SomeCommand1);
@@ -64,8 +64,8 @@ describe('CommandObserver', function () {
 
 		it('should register a multiple different commands to the same message', function() {
 			var data, SomeCommand1, SomeCommand2;
-			SomeCommand1 = Command.extend({});
-			SomeCommand2 = Command.extend({});
+			SomeCommand1 = BackMVC.Command.extend({});
+			SomeCommand2 = BackMVC.Command.extend({});
 
 			observer.register('someMessage', SomeCommand);
 			observer.register('someMessage', SomeCommand1);
@@ -91,7 +91,7 @@ describe('CommandObserver', function () {
 		var SomeCommand;
 
 		beforeEach(function () {
-			SomeCommand = Command.extend({});
+			SomeCommand = BackMVC.Command.extend({});
 		});
 
 		afterEach(function () {
@@ -121,8 +121,8 @@ describe('CommandObserver', function () {
 
 		it('should remove a single already registered command if multiple different commands have been registered', function() {
 			var data, SomeCommand1, SomeCommand2;
-			SomeCommand1 = Command.extend({});
-			SomeCommand2 = Command.extend({});
+			SomeCommand1 = BackMVC.Command.extend({});
+			SomeCommand2 = BackMVC.Command.extend({});
 
 			observer.register('someMessage', SomeCommand);
 			observer.register('someMessage1', SomeCommand1);
@@ -136,8 +136,8 @@ describe('CommandObserver', function () {
 
 		it('should remove a all registered commands to a message if multiple commands have been registered to same message', function() {
 			var data, SomeCommand1, SomeCommand2;
-			SomeCommand1 = Command.extend({});
-			SomeCommand2 = Command.extend({});
+			SomeCommand1 = BackMVC.Command.extend({});
+			SomeCommand2 = BackMVC.Command.extend({});
 
 			observer.register('someMessage', SomeCommand);
 			observer.register('someMessage', SomeCommand1);

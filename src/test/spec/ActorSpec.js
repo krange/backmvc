@@ -2,8 +2,8 @@ describe('Actor', function () {
 	var actor, facade;
 
 	beforeEach(function () {
-		facade = new Facade();
-		actor = _.extend({}, Actor);
+		facade = new BackMVC.Facade();
+		actor = _.extend({}, BackMVC.Actor);
 		actor.registerFacade(facade);
 	});
 
