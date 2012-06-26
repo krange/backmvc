@@ -7,6 +7,8 @@ Back-MVC acts as the glue to bind a Backbone.js application is a more traditiona
 
 Unit-tested through Jasmine.
 
+Release version in Downloads. 6kb minified!
+
 # Usage
 
 ### Facade
