@@ -113,3 +113,14 @@ Create a 'main' style class and instantiate your facade with your provided appli
 var facade = new ApplicationFacade();
 facade.startup();
 ```
+
+### AMD support
+
+If you are using a AMD supported plugin, BackMVC supports this. Just prefix any of the classes with BackMVC. Example:
+
+```js
+var YourFacade = BackMVC.Facade.extend({});
+var SomeCommand = BackMVC.Command.extend({});
+var SomeModel = BackMVC.Model.extend({});
+var SomeView = BackMVC.View.extend({});
+```

@@ -1,5 +1,5 @@
 /*!
- * BackMVC.js 0.1.0
+ * BackMVC.js 0.3.0
  * May be freely distributed under the MIT license
  * https://github.com/krange/backmvc
  */
@@ -8,7 +8,7 @@
 		RouterObserver, ViewObserver, Model, Collection, View, Command, Router,
 		Facade, BackMVC;
 
-	global.BackMVC = BackMVC = {};
+	BackMVC = {};
 
 	/**
 	 * Base object that can register and remove a facade object. Each actor in
@@ -558,7 +558,7 @@
 			this._routerObserver.registerFacade(this);
 			this._viewObserver.registerFacade(this);
 	};
-	global.Facade = BackMVC.Facade = Facade;
+	BackMVC.Facade = Facade;
 	Facade.extend = Backbone.Model.extend;
 	_.extend(Facade.prototype, {
 		/**
@@ -741,7 +741,7 @@
 		this.name = name;
 		Backbone.Model.call(this, attributes, options);
 	};
-	global.Model = BackMVC.Model = Model;
+	BackMVC.Model = Model;
 	Model.extend = Backbone.Model.extend;
 	_.extend(Model.prototype, Actor, Backbone.Model.prototype);
 	delete Model.prototype.registerView;
@@ -762,7 +762,7 @@
 		this.name = name;
 		Backbone.Router.call(this, options);
 	};
-	global.Router = BackMVC.Router = Router;
+	BackMVC.Router = Router;
 	Router.extend = Backbone.Router.extend;
 	_.extend(Router.prototype, Actor, Backbone.Router.prototype);
 
@@ -783,7 +783,7 @@
 		Backbone.Collection.call(this, attributes, options);
 	};
 
-	global.Collection = BackMVC.Collection = Collection;
+	BackMVC.Collection = Collection;
 	Collection.extend = Backbone.Collection.extend;
 	_.extend(Collection.prototype, Actor, Backbone.Collection.prototype);
 	delete Collection.prototype.registerView;
@@ -799,7 +799,7 @@
 	Command = function () {
 		this.facade = undefined;
 	};
-	global.Command = BackMVC.Command = Command;
+	BackMVC.Command = Command;
 	Command.extend = Backbone.Model.extend;
 	_.extend(Command.prototype, Actor, {
 		/**
@@ -850,7 +850,7 @@
 
 		Backbone.View.call(this, attributes, options);
 	};
-	global.View = BackMVC.View = View;
+	BackMVC.View = View;
 	View.extend = Backbone.View.extend;
 	_.extend(View.prototype, Actor, Backbone.View.prototype, {
 		/**
@@ -866,4 +866,12 @@
 			return this.messageInterests;
 		}
 	});
-}(window))
+
+	if (typeof define === 'function' && define.amd) {
+		define(BackMVC);
+	} else if (typeof module !== 'undefined' && module.exports) {
+		module.exports = BackMVC;
+	} else {
+		global['signals'] = BackMVC;
+	}
+}(window));
