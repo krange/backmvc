@@ -116,11 +116,13 @@ facade.startup();
 
 ### AMD support
 
-If you are using a AMD supported plugin, BackMVC supports this. Just prefix any of the classes with BackMVC. Example:
+If you are using a AMD supported plugin like Require.js, BackMVC supports this. Just prefix any of the classes with BackMVC. Example:
 
 ```js
-var YourFacade = BackMVC.Facade.extend({});
-var SomeCommand = BackMVC.Command.extend({});
-var SomeModel = BackMVC.Model.extend({});
-var SomeView = BackMVC.View.extend({});
+define(['backmvc'], function (BackMVC) {
+	var SomeView = BackMVC.View.extend({
+	});
+	SomeView.NAME = 'SomeView';
+	return SomeView;
+});
 ```
