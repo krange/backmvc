@@ -1,8 +1,16 @@
 describe('Collection', function () {
-	var collection, SomeCollection;
+	var collection, SomeCollection, SomeModel;
 
 	beforeEach(function () {
+		SomeModel = Backbone.Model.extend({
+		});
+
+		SomeBackMVCModel = BackMVC.Model.extend({
+		});
+		SomeBackMVCModel.NAME = 'SomeBackMVCModel';
+
 		SomeCollection = BackMVC.Collection.extend({
+			model: SomeModel
 		});
 		SomeCollection.NAME = 'SomeCollection';
 	});
@@ -83,6 +91,50 @@ describe('Collection', function () {
 
 				collection.removeFacade();
 				expect(collection.onRemove).toHaveBeenCalled();
+			});
+		});
+	});
+
+	describe('Model', function () {
+		describe('Backbone.Model', function () {
+			it('should add a single pre-defined Model in the constructor correctly', function () {
+				var model = new SomeModel();
+				collection = new SomeCollection(SomeCollection.NAME, [model]);
+				expect(collection.get(model.id)).toBe(model.id);
+			});
+
+			it('should add multiple pre-defined Models in the constructor correctly', function () {
+				var model, model1, model2;
+				model = new SomeModel();
+				model1 = new SomeModel();
+				model2 = new SomeModel();
+
+				collection = new SomeCollection(SomeCollection.NAME, [model, model1, model2]);
+
+				expect(collection.get(model.id)).toBe(model.id);
+				expect(collection.get(model1.id)).toBe(model1.id);
+				expect(collection.get(model2.id)).toBe(model2.id);
+			});
+		});
+
+		describe('BackMVC.Model', function () {
+			it('should add a single pre-defined Model in the constructor correctly', function () {
+				var model = new SomeBackMVCModel(SomeBackMVCModel.NAME);
+				collection = new SomeCollection(SomeCollection.NAME, [model]);
+				expect(collection.get(model.id)).toBe(model.id);
+			});
+
+			it('should add multiple pre-defined Models in the constructor correctly', function () {
+				var model, model1, model2;
+				model = new SomeBackMVCModel(SomeBackMVCModel.NAME);
+				model1 = new SomeBackMVCModel(SomeBackMVCModel.NAME + '1');
+				model2 = new SomeBackMVCModel(SomeBackMVCModel.NAME + '2');
+
+				collection = new SomeCollection(SomeCollection.NAME, [model, model1, model2]);
+
+				expect(collection.get(model.id)).toBe(model.id);
+				expect(collection.get(model1.id)).toBe(model1.id);
+				expect(collection.get(model2.id)).toBe(model2.id);
 			});
 		});
 	});
