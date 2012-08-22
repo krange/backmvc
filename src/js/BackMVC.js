@@ -872,6 +872,6 @@
 	} else if (typeof module !== 'undefined' && module.exports) {
 		module.exports = BackMVC;
 	} else {
-		global['signals'] = BackMVC;
+		global['BackMVC'] = BackMVC;
 	}
 }(window));

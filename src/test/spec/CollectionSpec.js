@@ -14,7 +14,6 @@ describe('Collection', function () {
 	describe('Instantiation', function () {
 		it('name', function() {
 			collection = new SomeCollection(SomeCollection.NAME);
-
 			expect(collection.getName()).toBe(SomeCollection.NAME);
 		});
 	});
