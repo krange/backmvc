@@ -6,8 +6,9 @@ Back-MVC
 Back-MVC acts as the glue to bind a Backbone.js application is a more traditional MVC framework. Back-MVC is an extension of a previous [JS-MVC experiment](https://github.com/krange/JS-MVC). Just like JS-MVC, Back-MVC is loosely based on [PureMVC](http://puremvc.org) and [Fabrication](http://code.google.com/p/fabrication/)
 
 Unit-tested through Jasmine.
-
-Release version in Downloads. 6kb minified!
+Own namespace (BackMVC).
+AMD support.
+Release version in Downloads. 6kb minified.
 
 # Usage
 
@@ -20,7 +21,7 @@ Commands, Models, Views and Routers are provided access to the facade directly b
 #### ApplicationFacade.js
 
 ```js
-ApplicationFacade = Facade.extend({
+ApplicationFacade = BackMVC.Facade.extend({
 	startup: function () {
 		this.registerCommand('startup', StartupCommand);
 		this.sendMessage('startup', $('#container'));
@@ -35,7 +36,7 @@ Commands execute your user interactions and interact with the models/collections
 #### StartupCommand.js
 
 ```js
-StartupCommand = Command.extend({
+StartupCommand = BackMVC.Command.extend({
 	execute: function (message) {
 		var element = message.getBody();
 		// Register main view
@@ -56,7 +57,7 @@ The data of a model/collection is provided through Backbone.js functionality
 #### SomeModel.js
 
 ```js
-SomeModel = Model.extend({
+SomeModel = BackMVC.Model.extend({
 	getSomeValue: function () {
 		return this.get('someValue');
 	}
@@ -78,7 +79,7 @@ When a message is sent out in the framework, views can listen to them directly b
 #### ApplicationView.js
 
 ```js
-ApplicationView = View.extend({
+ApplicationView = BackMVC.View.extend({
 	onRegister: function () {
 		// Do something
 	},
@@ -96,7 +97,7 @@ ApplicationView.NAME = 'ApplicationView';
 Notification is such a long word to write. Message is much easier and faster. Same basic principle, an actor sends out a mesasge that other actors are listening and can respond to. A *Message* takes 3 parameters (name, body, type) but only *name* is required.
 
 ```js
-StartupCommand = Command.extend({
+StartupCommand = BackMVC.Command.extend({
 	execute: function (message) {
 		this.sendMessage('applicationLoadComplete', message.getBody(), message.getType());
 	}
@@ -112,17 +113,4 @@ Create a 'main' style class and instantiate your facade with your provided appli
 ```js
 var facade = new ApplicationFacade();
 facade.startup();
-```
-
-### AMD support
-
-If you are using a AMD supported plugin like Require.js, BackMVC supports this. Just prefix any of the classes with BackMVC. Example:
-
-```js
-define(['backmvc'], function (BackMVC) {
-	var SomeView = BackMVC.View.extend({
-	});
-	SomeView.NAME = 'SomeView';
-	return SomeView;
-});
 ```
