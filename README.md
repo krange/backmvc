@@ -5,10 +5,10 @@ Back-MVC
 
 Back-MVC acts as the glue to bind a Backbone.js application is a more traditional MVC framework. Back-MVC is an extension of a previous [JS-MVC experiment](https://github.com/krange/JS-MVC). Just like JS-MVC, Back-MVC is loosely based on [PureMVC](http://puremvc.org) and [Fabrication](http://code.google.com/p/fabrication/)
 
-Unit-tested through Jasmine.
-Own namespace (BackMVC).
-AMD support.
-Release version in Downloads. 6kb minified.
+- Unit-tested.
+- Namespaced (BackMVC).
+- AMD support.
+- Release version in Downloads. 6kb minified.
 
 # Usage
 
