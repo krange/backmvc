@@ -1,5 +1,5 @@
 /*!
- * BackMVC.js 0.4.0
+ * BackMVC.js 0.5.0
  * May be freely distributed under the MIT license
  * https://github.com/krange/backmvc
  */
@@ -32,8 +32,8 @@
 		 * itself from the actor
 		 */
 		removeFacade: function () {
-			this.facade = undefined;
 			this.onRemove();
+			this.facade = undefined;
 		},
 
 		/**
