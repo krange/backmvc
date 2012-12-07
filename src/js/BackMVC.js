@@ -813,7 +813,7 @@
 		execute: function (message) {
 		}
 	});
-	delete Command.prototype.getName();
+	delete Command.prototype.getName;
 
 	/**
 	 * A registerable actor in the framework which inherits from the
