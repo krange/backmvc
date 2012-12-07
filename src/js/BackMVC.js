@@ -373,7 +373,7 @@
 	 */
 	ModelObserver = function () {
 		BaseObserver.apply(this, arguments);
-	}
+	};
 	BackMVC.ModelObserver = ModelObserver;
 	_.extend(ModelObserver.prototype, BaseObserver.prototype, {
 		/**
@@ -389,7 +389,7 @@
 				modelName = model.getName();
 
 				if (modelName && modelName.length > 0 && !this._data[modelName]) {
-					this._data[modelName] = model
+					this._data[modelName] = model;
 					model.registerFacade(this.facade);
 					return model;
 				}
@@ -448,7 +448,7 @@
 				viewName = view.getName();
 
 				if (viewName && viewName.length > 0 && !this._data[viewName]) {
-					this._data[viewName] = view
+					this._data[viewName] = view;
 					view.registerFacade(this.facade);
 					return view;
 				}
@@ -506,7 +506,7 @@
 			if (router && router instanceof Router) {
 				routerName = router.getName();
 				if (routerName && routerName.length > 0 && !this._data[routerName]) {
-					this._data[routerName] = router
+					this._data[routerName] = router;
 					router.registerFacade(this.facade);
 					return router;
 				}
@@ -539,7 +539,7 @@
 				delete this._data[router.getName()];
 				return router;
 			}
-		},
+		}
 	});
 
 	/**
@@ -813,7 +813,7 @@
 		execute: function (message) {
 		}
 	});
-	delete Command.prototype.getName();
+	delete Command.prototype.getName;
 
 	/**
 	 * A registerable actor in the framework which inherits from the
@@ -872,6 +872,6 @@
 	} else if (typeof module !== 'undefined' && module.exports) {
 		module.exports = BackMVC;
 	} else {
-		global['BackMVC'] = BackMVC;
+		global.BackMVC = BackMVC;
 	}
 }(window));
