@@ -1,5 +1,5 @@
 /*!
- * BackMVC.js 0.5.0
+ * BackMVC.js 0.5.1
  * May be freely distributed under the MIT license
  * https://github.com/krange/backmvc
  */
@@ -385,7 +385,8 @@
 		register: function (model) {
 			var modelName;
 
-			if (model && model instanceof Model) {
+			if (model instanceof Model ||
+					model instanceof Collection) {
 				modelName = model.getName();
 
 				if (modelName && modelName.length > 0 && !this._data[modelName]) {
@@ -444,7 +445,7 @@
 		register: function (view) {
 			var viewName;
 
-			if (view && view instanceof View) {
+			if (view instanceof View) {
 				viewName = view.getName();
 
 				if (viewName && viewName.length > 0 && !this._data[viewName]) {
@@ -503,7 +504,7 @@
 		 */
 		register: function (router) {
 			var routerName;
-			if (router && router instanceof Router) {
+			if (router instanceof Router) {
 				routerName = router.getName();
 				if (routerName && routerName.length > 0 && !this._data[routerName]) {
 					this._data[routerName] = router;

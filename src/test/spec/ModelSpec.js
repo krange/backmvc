@@ -100,5 +100,15 @@ describe('Model', function () {
 				expect(model.onRemove).toHaveBeenCalled();
 			});
 		});
+
+		describe('registerModel', function () {
+			it('should register a model', function () {
+				var registeredModel;
+				model = new SomeModel(SomeModel.NAME);
+				registeredModel = facade.registerModel(model);
+
+				expect(registeredModel).toBe(model);
+			});
+		});
 	});
 });

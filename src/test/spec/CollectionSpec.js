@@ -93,6 +93,16 @@ describe('Collection', function () {
 				expect(collection.onRemove).toHaveBeenCalled();
 			});
 		});
+
+		describe('registerModel', function () {
+			it('should register a collection', function () {
+				var registeredCollection;
+				collection = new SomeCollection(SomeCollection.NAME);
+				registeredCollection = facade.registerModel(collection);
+
+				expect(registeredCollection).toBe(collection);
+			});
+		});
 	});
 
 	describe('Model', function () {
