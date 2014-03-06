@@ -1,5 +1,5 @@
 /*!
- * BackMVC.js 0.5.1
+ * BackMVC.js 0.5.1 with changes
  * May be freely distributed under the MIT license
  * https://github.com/krange/backmvc
  */
@@ -694,24 +694,25 @@
 		 * @param {String} type An optional type string
 		 */
 		sendMessage: function (name, body, type) {
-			var message, views, facade;
-			facade = this;
-			message = new Message(name, body, type);
+			var message = new Message(name, body, type),
+				facade = this,
+				responding = [];
 
 			_.each(this._commandObserver.get(), function (items, messageName, commandsObj) {
 				if (name === messageName) {
 					_.each(items, function (item, itemIndex, itemsArr) {
 						var command = new itemsArr[itemIndex]();
 						if (command instanceof Command) {
-							command.registerFacade(facade);
-							command.execute(message);
+							responding.push(function () {
+								command.registerFacade(facade);
+								command.execute(message);
+							});
 						}
 					});
 				}
 			});
 
-			views = this._viewObserver.get();
-			_.each(views, function (view, viewName, views) {
+			_.each(this._viewObserver.get(), function (view, viewName, views) {
 				var interests = view.getMessageInterests();
 
 				_.each(interests, function (interest, interestIndex, interests) {
@@ -719,9 +720,15 @@
 
 					if (name === interest) {
 						interestName = interests[interestIndex].charAt(0).toUpperCase() + interest.slice(1);
-						view['respondTo' + interestName](message);
+						responding.push(function () {
+							view['respondTo' + interestName](message);
+						});
 					}
 				});
+			});
+
+			_.each(responding, function(respond){
+				respond();
 			});
 		}
 	});

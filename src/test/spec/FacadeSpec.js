@@ -242,6 +242,87 @@ describe('Facade', function () {
 
 				window.messageReceieved = undefined;
 			});
+
+
+			it('We can register and remove listeners' +
+				' while a message is sent', function() {
+				var view1, view2, view3, ReceivedView, ReceivedCommand;
+
+				ReceivedCommand = BackMVC.Command.extend({
+					execute: function (message) {
+						// The command removes view 1
+						facade.removeView(view1.getName());
+					}
+				});
+
+				ReceivedView = BackMVC.View.extend({
+					respondToTestMessage: function (message) {
+					}
+				});
+				ReceivedView.NAME = 'ReceivedView';
+
+				view1 = new ReceivedView(ReceivedView.NAME + '1');
+				view2 = new ReceivedView(ReceivedView.NAME + '2');
+				view3 = new ReceivedView(ReceivedView.NAME + '3');
+				view4 = new ReceivedView(ReceivedView.NAME + '4');
+
+				view1.respondToTestMessage = function () {
+					//View 1 removes view 2
+					facade.removeView(view2.getName());
+				};
+
+				view3.respondToTestMessage = function () {
+					//View 3 registers a new view 4
+					facade.registerView(view4);
+				};
+
+				// The sender, defined outside this test
+				facade.registerView(view);
+
+				facade.registerCommand('testMessage', ReceivedCommand);
+				facade.registerView(view1);
+				facade.registerView(view2);
+				facade.registerView(view3);
+				// Note view 4 is not registered here, it is registered later
+
+				spyOn(view1, 'respondToTestMessage').andCallThrough();
+				spyOn(view2, 'respondToTestMessage').andCallThrough();
+				spyOn(view3, 'respondToTestMessage').andCallThrough();
+				spyOn(view4, 'respondToTestMessage').andCallThrough();
+
+				view.sendMessage('testMessage');
+
+				// View 1 does get called even though the command
+				// called remove on the view, because remove happens
+				// AFTER respondTo callbacks.
+				expect(view1.respondToTestMessage).toHaveBeenCalled();
+
+				// View2 existed at the time the message was sent, so it is
+				//  called even though view 1 removed it.
+				expect(view2.respondToTestMessage).toHaveBeenCalled();
+
+				expect(view3.respondToTestMessage).toHaveBeenCalled();
+
+				// View 4 does NOT get the message, it was registered AFTER the
+				// message was sent inside view 3:s responsdTo method.
+				expect(view4.respondToTestMessage).not.toHaveBeenCalled();
+
+				// Lets do it again too see that view1 and view2 are removed
+				// and does not get messages
+				view1.respondToTestMessage = function () {
+					console.error("I am not called, I am not in the facade");
+				};
+				view2.respondToTestMessage = view1.respondToTestMessage;
+				spyOn(view1, 'respondToTestMessage').andCallThrough();
+				spyOn(view2, 'respondToTestMessage').andCallThrough();
+				view.sendMessage('testMessage');
+
+				// View1 and view2 were removed earlier
+				expect(view1.respondToTestMessage).not.toHaveBeenCalled();
+				expect(view2.respondToTestMessage).not.toHaveBeenCalled();
+			});
+
+
 		});
 	});
 
