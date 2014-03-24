@@ -698,7 +698,7 @@
 				facade = this,
 				responding = [];
 
-			_.each(this._commandObserver.get(), function (items, messageName, commandsObj) {
+			_.find(this._commandObserver.get(), function (items, messageName, commandsObj) {
 				if (name === messageName) {
 					_.each(items, function (item, itemIndex, itemsArr) {
 						var command = new itemsArr[itemIndex]();
@@ -709,13 +709,14 @@
 							});
 						}
 					});
+					return true;
 				}
 			});
 
 			_.each(this._viewObserver.get(), function (view, viewName, views) {
 				var interests = view.getMessageInterests();
 
-				_.each(interests, function (interest, interestIndex, interests) {
+				_.find(interests, function (interest, interestIndex, interests) {
 					var interestName;
 
 					if (name === interest) {
@@ -723,11 +724,12 @@
 						responding.push(function () {
 							view['respondTo' + interestName](message);
 						});
+						return true;
 					}
 				});
 			});
 
-			_.each(responding, function(respond){
+			_.each(responding, function (respond) {
 				respond();
 			});
 		}
