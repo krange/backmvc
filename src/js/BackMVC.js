@@ -1,5 +1,5 @@
 /*!
- * BackMVC.js 0.5.1 with changes
+ * BackMVC.js 0.5.3 with changes
  * May be freely distributed under the MIT license
  * https://github.com/krange/backmvc
  */
